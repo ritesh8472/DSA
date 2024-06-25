@@ -1,0 +1,166 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node * next;
+};
+void linkedlistTraversal(struct node * head){
+	while(head!=NULL){
+		printf("%d\n",head->data);
+		head=head->next;
+	}
+}
+struct node* insertbegin(struct node * head){
+	struct node * newnode;
+	newnode=(struct node *)malloc(sizeof(struct node));
+	if(head==NULL){
+		head=newnode;
+		return;
+	}
+	else{
+		printf("Enter the data to be inserted at begining\n");
+		scanf("%d",&newnode->data);
+		printf("\n");
+		newnode->next=head;
+		head=newnode;
+		return head;
+	}
+	return 0;
+}
+struct node* insertend(struct node * head){
+	struct node * newnode;
+	
+    newnode=(struct node *)malloc(sizeof(struct node));
+    if(head==NULL){
+    	head=newnode;
+    	return;
+	}
+	else{
+		printf("Enter the data to be stored at end\n");
+		scanf("%d",&newnode->data);
+		printf("\n");
+		struct node * ptr=head;
+		
+		
+		while(ptr->next!=NULL){
+			ptr=ptr->next;
+		}
+		ptr->next=newnode;
+		newnode->next=NULL;
+		return head;
+	}
+	return 0;
+}
+struct node * insert_at_pos(struct node * head){
+	if(head==NULL){
+		printf("Linked list is empty");
+			return;
+	}
+	else{
+		struct node * newnode;
+		newnode=(struct node*)malloc(sizeof(struct node));
+	    int i=1,pos;
+	    printf("Enter the position\n");
+    	scanf("%d",&pos);
+    	struct node * ptr = head;
+    	while(i<pos-1){
+	 	    ptr=ptr->next;
+		    i++;
+	    }
+	    printf("Enter the data to be stored\n");
+	    scanf("%d",&newnode->data);
+	    printf("\n");
+	    newnode->next=ptr->next;
+	    ptr->next=newnode;
+    	return head;
+    }
+	return 0;
+}
+struct node*delete_beg(struct node * head){
+	if(head==NULL){
+		printf("Linkesd List is empty");
+		return;
+	}
+	else{
+		struct node * ptr=head;
+		head=ptr->next;
+		free(ptr);
+		return head;
+	}
+	return 0;
+}
+struct node* delete_end(struct node * head){
+	
+	if(head==NULL){
+		printf("Linked List is empty");
+		return;
+	}
+	else{
+	    struct node * ptr=head;
+	    struct node * prev;	
+	    while(ptr->next!=NULL){
+	    	prev=ptr;
+	    	ptr=ptr->next;
+		}
+		if(ptr==head){
+			head=NULL;
+		}
+		else{
+			prev->next=NULL;
+		}
+		free(ptr);
+		return head;
+	}
+	return 0;
+}
+struct node* delete_pos(struct node * head){
+	if(head==NULL){
+		printf("Linked list is empty");
+		return;
+	}
+	else{
+		struct node * ptr, * prev;
+		prev=head;
+		int i=1,pos;
+		printf("Enter the position\n");
+		scanf("%d",&pos);
+		printf("\n");
+		while(i<pos-1){
+			prev=prev->next;
+			i++;
+		}
+		ptr=prev->next;
+		prev->next=ptr->next;
+		free(ptr);
+		return head;
+	}
+	return 0;
+}
+void main(){ 
+	struct node * head;
+	struct node * second;
+	struct node * third;
+	head=(struct node *)malloc(sizeof(struct node));
+	second=(struct node *)malloc(sizeof(struct node));
+	third=(struct node *)malloc(sizeof(struct node));
+	head->data=10;
+	head->next=second;
+	
+	second->data=20;
+	second->next=third;
+	
+	third->data=30;
+	third->next=NULL;
+	
+    head=insertbegin(head);
+	head=insertend(head);
+    head=insert_at_pos(head);
+    head=delete_beg(head);
+    head=delete_end(head);
+    head=delete_pos(head);
+    
+	
+	linkedlistTraversal(head);
+	
+	
+}
