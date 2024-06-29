@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node * next;
+};
+void linkedlistTraversal(struct node * head){
+	while(head!=NULL){
+		printf("%d\n",head->data);
+		head=head->next;
+	}
+}
+struct node* reverse(struct node * head){
+	if(head==NULL){
+		printf("Linked list is empty\n");
+		return;
+	}
+	else{
+		struct node * prev,*current,*next;
+		prev=NULL;
+		current=next=head;
+		while(next!=NULL){
+			next=next->next;
+			current->next=prev;
+			prev=current;
+			current=next;
+		}
+		head=prev;
+		return head;
+	}
+	return 0;
+	
+}
+void main(){ 
+	struct node * head;
+	struct node * second;
+	struct node * third;
+	struct node * fourth;
+	head=(struct node *)malloc(sizeof(struct node));
+	second=(struct node *)malloc(sizeof(struct node));
+	third=(struct node *)malloc(sizeof(struct node));
+	fourth=(struct node *)malloc(sizeof(struct node));
+	head->data=10;
+	head->next=second;
+	
+	second->data=20;
+	second->next=third;
+	
+	third->data=30;
+	third->next=fourth;
+	
+	fourth->data=40;
+	fourth->next=NULL;
+	linkedlistTraversal(head);
+	printf("\n");
+	printf("Linked list after reversing\n");
+	head=reverse(head);
+	
+	linkedlistTraversal(head);
+	
+	
+}
+	
