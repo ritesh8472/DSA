@@ -1,0 +1,22 @@
+int factorial(int n){
+	int fact=1,i=1;
+	for(i=1;i<=n;i++){
+		fact=fact*i;
+	}
+	return fact;
+}
+
+int nCr(int n,int r){
+	int num=factorial(n);
+	int den=factorial(r)*factorial(n-r);
+	return num/den;
+	
+}
+
+void main(){
+	int n,r;
+	printf("Enter the number\n");
+	scanf("%d%d",&n,&r);
+	int ans=nCr(n,r);
+	printf("Required value of nCr is %d",ans);
+}
